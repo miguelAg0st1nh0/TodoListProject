@@ -4,19 +4,25 @@
 <PageTitle>Home</PageTitle>
 
 <div>
-    
-    <h1>Welcome to the Todo List Application!</h1>
-    <p>Manage your tasks efficiently and stay organized.</p>
+    <h1>Add a task:</h1>
+    <input type="text" @bind="taskClass.Title"/>
     <p>@DefaultExamples()</p>
 </div>
 
 
 @code {
     private TaskClass taskClass = new TaskClass();
-
+    private string message = "";
     private string DefaultExamples()
     {
         return taskClass.Title = "Walk the Dog!";
+    }
+    @*
+    Fix this page by adding form that handles @onsubmit to add the text as a new Task;
+    *@
+    private void Test()
+    {
+        message = taskClass.Title;
     }
 
 }
