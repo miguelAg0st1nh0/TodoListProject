@@ -6,7 +6,7 @@
 
 a, a:hover, a:focus, a:active {
     text-decoration: none;
-    color: inherit; /* Prevents links from turning that default "Internet Blue" */
+    color: inherit; 
 }
 
 body {
