@@ -1,15 +1,39 @@
 ﻿
 
-<div class="sidebar">
-    <h1>Todo List</h1>
+<div class="sidebar @(isCollapsed ? "collapsed" : "")">
+    <div class="menu-header">
+        <button class="main-button" @onclick="ToggleSidebar">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        
+    </div>
+    <div class="sidebar-elements">
+        <span class="material-symbols-outlined">sunny</span>
+        <NavLink href="/">
+            <p>My Day</p>
+        </NavLink>
+    </div>
+    <div class="sidebar-elements">
+        <span class="material-symbols-outlined">emergency_home</span>
+        <NavLink href="/important">
+            <p>Important</p>
+        </NavLink>
+    </div>
+
+    <div class="sidebar-elements">
+        <span class="material-symbols-outlined">settings</span>
+        <NavLink href="/">
+            <p>Settings</p>
+        </NavLink>
+    </div>
+
 </div>
 
-
-
-
-
-
-
 @code {
+    private bool isCollapsed = false;
 
+    private void ToggleSidebar()
+    {
+        isCollapsed = !isCollapsed;
+    }
 }
