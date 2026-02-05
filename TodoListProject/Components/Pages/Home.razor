@@ -1,7 +1,60 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div>
+    <h1>My Day</h1>
+    <h4>@DisplayCustomDate()</h4>
+    <div class="main-container">
+        <div class="task-container">
+            <input type="text" placeholder="Add a task..." @bind="taskClass.Title"/>
+            <button @onclick="AddTaskToList">AddTask</button>
+            @foreach (var task in taskList)
+            {
+                <div class="task-item">
+                    <h3>@task.Title</h3>
+                    <p>@task.Description</p>
+                    <input type="radio" @bind="task.IsCompleted" /> Completed?
+                    <button @onclick="() => RemoveTaskFromList(task)">Remove</button>
+                </div>
+            }
+        </div>
 
-Welcome to your new app.
+    </div>
+
+</div>
+
+
+@code {
+    private TaskClass taskClass = new TaskClass();
+    private List<TaskClass> taskList = new List<TaskClass>();
+
+    private void AddTaskToList()
+    {
+        var newTask = new TaskClass
+            {
+                Id = taskList.Count + 1,
+                Title = taskClass.Title,
+                Description = "New Description",
+                IsCompleted = false,
+            };
+
+        taskList.Add(newTask);
+
+        taskClass.Title = string.Empty;
+
+    }
+
+    private void RemoveTaskFromList(TaskClass task)
+    {
+        taskList.Remove(task);
+    }
+
+
+    private string DisplayCustomDate()
+    {
+        return DateTime.Now.ToString("dddd, d, MMMM");
+    }
+
+}

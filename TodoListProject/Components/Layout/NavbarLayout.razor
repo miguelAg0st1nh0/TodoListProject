@@ -1,0 +1,38 @@
+﻿
+
+<div class="sidebar @(isCollapsed ? "collapsed" : "")">
+    <div class="menu-header">
+        <button class="main-button" @onclick="ToggleSidebar">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        
+    </div>
+    <NavLink class="link" href="/" Match="NavLinkMatch.All">
+        <div class="sidebar-elements">
+            <span class="material-symbols-outlined">sunny</span>
+            <p>My Day</p>
+        </div>
+    </NavLink>
+    <NavLink class="link" href="/important">
+        <div class="sidebar-elements">
+            <span class="material-symbols-outlined">emergency_home</span>
+            <p>Important</p>
+        </div>
+    </NavLink>
+    <NavLink class="link" href="/settings">
+        <div class="sidebar-elements">
+            <span class="material-symbols-outlined">settings</span>
+            <p>Settings</p>
+        </div>
+    </NavLink>
+
+</div>
+
+@code {
+    private bool isCollapsed = false;
+
+    private void ToggleSidebar()
+    {
+        isCollapsed = !isCollapsed;
+    }
+}
