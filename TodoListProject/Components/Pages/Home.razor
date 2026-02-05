@@ -4,25 +4,57 @@
 <PageTitle>Home</PageTitle>
 
 <div>
-    <h1>Add a task:</h1>
-    <input type="text" @bind="taskClass.Title"/>
-    <p>@DefaultExamples()</p>
+    <h1>My Day</h1>
+    <h4>@DisplayCustomDate()</h4>
+    <div class="main-container">
+        <div class="task-container">
+            <input type="text" placeholder="Add a task..." @bind="taskClass.Title"/>
+            <button @onclick="AddTaskToList">AddTask</button>
+            @foreach (var task in taskList)
+            {
+                <div class="task-item">
+                    <h3>@task.Title</h3>
+                    <p>@task.Description</p>
+                    <input type="radio" @bind="task.IsCompleted" /> Completed?
+                    <button @onclick="() => RemoveTaskFromList(task)">Remove</button>
+                </div>
+            }
+        </div>
+
+    </div>
+
 </div>
 
 
 @code {
     private TaskClass taskClass = new TaskClass();
-    private string message = "";
-    private string DefaultExamples()
+    private List<TaskClass> taskList = new List<TaskClass>();
+
+    private void AddTaskToList()
     {
-        return taskClass.Title = "Walk the Dog!";
+        var newTask = new TaskClass
+            {
+                Id = taskList.Count + 1,
+                Title = taskClass.Title,
+                Description = "New Description",
+                IsCompleted = false,
+            };
+
+        taskList.Add(newTask);
+
+        taskClass.Title = string.Empty;
+
     }
-    @*
-    Fix this page by adding form that handles @onsubmit to add the text as a new Task;
-    *@
-    private void Test()
+
+    private void RemoveTaskFromList(TaskClass task)
     {
-        message = taskClass.Title;
+        taskList.Remove(task);
+    }
+
+
+    private string DisplayCustomDate()
+    {
+        return DateTime.Now.ToString("dddd, d, MMMM");
     }
 
 }
